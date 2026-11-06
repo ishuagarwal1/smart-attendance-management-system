@@ -1,0 +1,7 @@
+</main>
+<footer class="footer">
+  <div class="wrap">Smart Attendance Management System v<c:out value="${appVersion}"/> &middot; Java Servlets &amp; JSP &middot; MySQL</div>
+</footer>
+<script src="${ctx}/js/app.js"></script>
+</body>
+</html>

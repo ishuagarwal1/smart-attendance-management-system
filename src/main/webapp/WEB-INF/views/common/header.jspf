@@ -1,0 +1,47 @@
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><c:out value="${pageTitle}"/> | SAMS</title>
+  <link rel="icon" type="image/svg+xml" href="${ctx}/images/favicon.svg">
+  <link rel="stylesheet" href="${ctx}/css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="${ctx}/dashboard"><span class="logo">&#10003;</span> SAMS</a>
+    <nav class="nav">
+      <c:choose>
+        <c:when test="${sessionScope.user.admin}">
+          <a href="${ctx}/admin/dashboard">Dashboard</a>
+          <a href="${ctx}/admin/users">Users</a>
+          <a href="${ctx}/admin/courses">Courses</a>
+          <a href="${ctx}/admin/reports">Reports</a>
+          <a href="${ctx}/admin/apikeys">API keys</a>
+        </c:when>
+        <c:when test="${sessionScope.user.teacher}">
+          <a href="${ctx}/teacher/dashboard">My courses</a>
+        </c:when>
+        <c:otherwise>
+          <a href="${ctx}/student/dashboard">My attendance</a>
+        </c:otherwise>
+      </c:choose>
+    </nav>
+    <div class="userbox">
+      <span class="who"><c:out value="${sessionScope.user.fullName}"/> <em class="role"><c:out value="${sessionScope.user.role}"/></em></span>
+      <a class="link" href="${ctx}/account/password">Password</a>
+      <form method="post" action="${ctx}/logout" class="inline">
+        <input type="hidden" name="_csrf" value="${sessionScope.csrfToken}">
+        <button class="btn btn-ghost btn-sm" type="submit">Sign out</button>
+      </form>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+<c:if test="${not empty sessionScope.flashMsg}">
+  <div class="alert alert-${sessionScope.flashType}" role="alert"><c:out value="${sessionScope.flashMsg}"/></div>
+  <c:remove var="flashMsg" scope="session"/>
+  <c:remove var="flashType" scope="session"/>
+</c:if>
