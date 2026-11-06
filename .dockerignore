@@ -1,0 +1,7 @@
+dist/
+docs/
+database/
+tests/
+target/
+.git/
+.env*
