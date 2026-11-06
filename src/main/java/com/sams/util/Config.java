@@ -34,7 +34,9 @@ public final class Config {
     public static String get(String key, String def) {
         // allow -Dsams.db.url=... style overrides on the command line
         String sys = System.getProperty("sams." + key);
-        return sys != null ? sys : PROPS.getProperty(key, def);
+        if (sys != null) return sys;
+        String env = System.getenv("SAMS_" + key.toUpperCase(java.util.Locale.ROOT).replace('.', '_'));
+        return env != null ? env : PROPS.getProperty(key, def);
     }
 
     public static int getInt(String key, int def) {
