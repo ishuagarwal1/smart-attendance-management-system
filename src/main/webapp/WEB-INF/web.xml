@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <display-name>Smart Attendance Management System</display-name>
+
+    <!-- JSTL: always format dates/numbers in English, even if the browser sends no Accept-Language -->
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+        <param-value>en</param-value>
+    </context-param>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <!-- Friendly error pages -->
+    <error-page><error-code>403</error-code><location>/WEB-INF/views/common/error.jsp</location></error-page>
+    <error-page><error-code>404</error-code><location>/WEB-INF/views/common/error.jsp</location></error-page>
+    <error-page><error-code>405</error-code><location>/WEB-INF/views/common/error.jsp</location></error-page>
+    <error-page><exception-type>java.lang.Throwable</exception-type><location>/WEB-INF/views/common/error.jsp</location></error-page>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <url-pattern>*.jspf</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+</web-app>
